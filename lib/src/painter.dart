@@ -32,16 +32,19 @@ class Painter extends StatelessWidget {
 
   /// 手指落下
   void _onPointerDown(PointerDownEvent pde) {
+    onPointerDown?.call(pde);
+
     if (!drawingController.couldStart(1)) {
       return;
     }
 
     drawingController.startDraw(pde.localPosition);
-    onPointerDown?.call(pde);
   }
 
   /// 手指移动
   void _onPointerMove(PointerMoveEvent pme) {
+    onPointerMove?.call(pme);
+
     if (!drawingController.couldDraw) {
       if (drawingController.currentContent != null) {
         drawingController.cancelDraw();
@@ -51,11 +54,12 @@ class Painter extends StatelessWidget {
     }
 
     drawingController.drawing(pme.localPosition);
-    onPointerMove?.call(pme);
   }
 
   /// 手指抬起
   void _onPointerUp(PointerUpEvent pue) {
+    onPointerUp?.call(pue);
+
     if (!drawingController.couldDraw ||
         drawingController.currentContent == null) {
       return;
@@ -66,7 +70,6 @@ class Painter extends StatelessWidget {
     }
 
     drawingController.endDraw();
-    onPointerUp?.call(pue);
   }
 
   /// GestureDetector 占位
