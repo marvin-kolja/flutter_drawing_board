@@ -44,6 +44,7 @@ class Painter extends StatelessWidget {
   void _onPointerMove(PointerMoveEvent pme) {
     if (!drawingController.couldDraw) {
       if (drawingController.currentContent != null) {
+        drawingController.cancelDraw();
         drawingController.endDraw();
       }
       return;
